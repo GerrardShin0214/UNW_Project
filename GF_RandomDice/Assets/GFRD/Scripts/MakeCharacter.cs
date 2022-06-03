@@ -30,7 +30,11 @@ public class MakeCharacter : MonoBehaviour
 
 	// 버튼을 클릭하면 이 함수를 호출
 	void TaskOnClick()
-	{        
+	{
+        // 주머니 비었으면 그냥 하지마
+        if (poketList.Count == 0)
+            return;
+
         //2.주머니의 안에서 아무거나 뽑는다.
         // 24 -> 23 -> 22 -> 21
         int randIndex = Random.Range(0, poketList.Count);
