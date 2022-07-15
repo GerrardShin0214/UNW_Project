@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +13,24 @@ public class GFRDMap : MonoBehaviour
     GameObject mapTilePrefab;
     void Start()
     {
-        for(int i = 0; i < mapSizeY; ++i)
+        MakeMap();
+    }
+
+    void MakeMap()
+    {
+        // 자식 가져와서 전부 부숨
+        for(int i = 0; i < transform.childCount; ++i)
+        {
+            var child = transform.GetChild(0);
+            Destroy(child);
+        }
+
+        for (int i = 0; i < mapSizeY; ++i)
         {
             for (int k = 0; k < mapSizeX; ++k)
             {
-                var instanced = GameObject.Instantiate(mapTilePrefab);
-                instanced.transform.position = new Vector3(k * 1, 0, i * 1); 
+                var instanced = GameObject.Instantiate(mapTilePrefab, this.transform);
+                instanced.transform.position = new Vector3(k * 1, 0, i * 1);
             }
         }
     }
@@ -26,5 +39,11 @@ public class GFRDMap : MonoBehaviour
     void Update()
     {
         
+    }
+
+    [Button]
+    void Test()
+    {
+        MakeMap();
     }
 }
